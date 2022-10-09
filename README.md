@@ -4,7 +4,7 @@ and applies the high-order flux-reconstructed discontinuous Galerkin schemes. Th
 
 TheBotzmann equation for gas flows describes the evolution of the gas molecular velocity distribution function $f=f(t, vec{x},\vec{v})$: 
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\partial_t f + \boldsymbol{v\cdot \nabla_x}f = Q(f,f_*), \quad t >0, ~~\boldsymbol{x} \in \Omega \subset \mathbb{R}^3, ~~\boldsymbol{v} \in \mathbb{R}^3" />
+<img src="https://latex.codecogs.com/svg.latex?\partial_t f + \boldsymbol{v\cdot \nabla_x}f = Q(f,f_*), \quad t >0, ~~\boldsymbol{x} \in \Omega \subset \mathbb{R}^3, ~~\boldsymbol{v} \in \mathbb{R}^3" />
 
 
 The collision integral calculations use two methodologies: 
