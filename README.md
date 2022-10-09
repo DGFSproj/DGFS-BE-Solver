@@ -2,7 +2,7 @@
 is an open-source software code for solving single/multi-species Boltzmann equation and related kinetic models for gas flows. It is designed for CUDA-enabled GPUs 
 and applies the high-order flux-reconstructed discontinuous Galerkin schemes. The primary codebase for the DGFS has been originally developed by Dr. Shashank Jaiswall as part of his PhD dissertation research supported under the NSF award "CDS&E: DEterministic Evaluation of Kinetic Boltzmann equation with Spectral H/p/v Accuracy".  
 
-TheBotzmann equation for gas flows describes the evolution of the gas molecular velocity distribution function $f=f(t, vec{x},\vec{v})$: 
+TheBotzmann equation for gas flows describes the evolution of the gas molecular velocity distribution function <img src="https://latex.codecogs.com/svg.latex?f=f(t, vec{x},\vec{v})/>: 
 
 <img src="https://latex.codecogs.com/svg.latex?\partial_t f + \boldsymbol{v\cdot \nabla_x}f = Q(f,f_*), \quad t >0, ~~\boldsymbol{x} \in \Omega \subset \mathbb{R}^3, ~~\boldsymbol{v} \in \mathbb{R}^3" />
 
