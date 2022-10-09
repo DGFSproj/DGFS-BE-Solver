@@ -4,6 +4,9 @@ and applies the high-order flux-reconstructed discontinuous Galerkin schemes. Th
 
 TheBotzmann equation for gas flows describes the evolution of the gas molecular velocity distribution function $f=f(t, vec{x},\vec{v})$: 
 
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;\partial_t f + \boldsymbol{v\cdot \nabla_x}f = Q(f,f_*), \quad t >0, ~~\boldsymbol{x} \in \Omega \subset \mathbb{R}^3, ~~\boldsymbol{v} \in \mathbb{R}^3" />
+
+
 The collision integral calculations use two methodologies: 
 * the explicit fast spectral schemes for full Boltzmann **[Gamba 2017, Jaiswal 2019a, Jaiswal 2019b]**. The method applies to general collision kernels, and the results can be "directly" compared with the DSMC without need of any recalibration or parametric fitting.  
 * the implicit schemes for linear kinetic models  **[Dimarco 2013, Dimarco 2017]**
