@@ -1,6 +1,9 @@
-### 2D/3D-3V Flux-reconstructed Discontinuous Galerkin Fast Spectral (DGFS)
+### 2D/3V Flux-reconstructed Discontinuous Galerkin Fast Spectral (DGFS)
 is an open-source software code for solving single/multi-species Boltzmann equation and related kinetic models for gas flows. It is designed for CUDA-enabled GPUs 
-and applies the high-order flux-reconstructed discontinuous Galerkin schemes.
+and applies the high-order flux-reconstructed discontinuous Galerkin schemes. The primary codebase for the DGFS has been originally developed by Dr. Shashank Jaiswall as part of his PhD dissertation research supported under the NSF award "CDS&E: DEterministic Evaluation of Kinetic Boltzmann equation with Spectral H/p/v Accuracy".  
+
+The 2D/3VBotzmann equation for gas flows describes the evolution of the gas molecular velocity distribution function $$f=f(t,
+vec{x},\vec{v})$$: 
 
 The collision integral calculations use two methodologies: 
 * the explicit fast spectral schemes for full Boltzmann **[Gamba 2017, Jaiswal 2019a, Jaiswal 2019b]**. The method applies to general collision kernels, and the results can be "directly" compared with the DSMC without need of any recalibration or parametric fitting.  
