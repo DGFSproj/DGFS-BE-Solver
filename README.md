@@ -1,13 +1,12 @@
-### 2D/3D-3V Flux-reconstructed Discontinuous Galerkin Fast Spectral (frfs)
-frfs, built atop PyFR, is a *minimal* code for solving single/multi-species 
-Boltzmann equation and related kinetic models on CUDA-enabled GPUs 
-using the high-order flux-reconstructed discontinuous Galerkin schemes.
+### 2D/3D-3V Flux-reconstructed Discontinuous Galerkin Fast Spectral (DGFS)
+is an open-source software code for solving single/multi-species Boltzmann equation and related kinetic models for gas flows. It is designed for CUDA-enabled GPUs 
+and applies the high-order flux-reconstructed discontinuous Galerkin schemes.
 
-From a collision modelling viewpoint, we use two methodologies: 
-* the explicit fast spectral schemes for full Boltzmann (as per **[Gamba 2017, Jaiswal 2019a, Jaiswal 2019b]**): the method applies straightforwardly to general collision kernels, and the results can be "directly" compared against DSMC without need of any recalibration or parametric fitting.  
-* the implicit schemes for linear kinetic models (as per **[Dimarco 2013, Dimarco 2017]**): iteration free approach!
+The collision integral calculations use two methodologies: 
+* the explicit fast spectral schemes for full Boltzmann **[Gamba 2017, Jaiswal 2019a, Jaiswal 2019b]**. The method applies to general collision kernels, and the results can be "directly" compared with the DSMC without need of any recalibration or parametric fitting.  
+* the implicit schemes for linear kinetic models  **[Dimarco 2013, Dimarco 2017]**
 
-From a time integration perspective, we use: 
+The time integration is performed via: 
 * 1st/2nd order explicit Strong Stability Preserving (SSP) Runge Kutta (RK) schemes
 * 1st/2nd/3rd order implicit-explicit Ascher-Ruuth-Spiteri (ARS) and backward-difference (BDF) schemes  
 
@@ -28,9 +27,7 @@ The overall schemes are simple from mathematical and implementation perspective;
   *Quantification of thermally-driven flows in microsystems using Boltzmann equation in deterministic and stochastic context.* Physics of Fluids 31(8): 082002. https://doi.org/10.1063/1.5108665
 
 ### License:
-*frfs* is released as GNU GPLv2 open-source software. The intention is to keep everything transparent, and adopt the practice in early part of research career.  
-
+*DGFS* is released as GNU GPLv2 open-source software. 
 This code has been derived from "PyFR". Please see licenses folder for restrictions.
 
-### Confessions:
-I admit that the codebase can be made more compact! 
+
