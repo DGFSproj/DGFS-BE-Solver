@@ -33,7 +33,7 @@ Python Dependencies (install via pip):
 	•	h5py
 	•	mpi4py
 	•	pycuda
-	•	gimmick==2.3 (⚠️ must be pinned to 2.3 to avoid compatibility issues)
+	•	gimmick==2.3 (must be pinned to 2.3 to avoid compatibility issues)
 
 ### Installation Instructions
 
