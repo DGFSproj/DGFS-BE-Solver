@@ -17,6 +17,99 @@ The time integration is performed via:
 
 The overall schemes are simple from mathematical and implementation perspective; highly accurate in both physical and velocity spaces as well as time; robust, i.e. applicable for general geometry and spatial mesh; exhibits nearly linear parallel scaling; and directly applies to general collision kernels needed for high fidelity flow modelling.  
 
+### Requirements:
+
+System Requirements:
+	•	Linux OS (Ubuntu, CentOS, etc.)
+	•	GCC ≥ 6.3.0
+	•	OpenMPI ≥ 3.1.6 (with CUDA support recommended)
+	•	CUDA Toolkit ≥ 11.0
+	•	Python 3.8+
+	•	GMSH 2.15.0 (for mesh generation)
+	•	METIS (for mesh partitioning)
+
+Python Dependencies (install via pip):
+	•	numpy
+	•	h5py
+	•	mpi4py
+	•	pycuda
+	•	gimmick==2.3 (⚠️ must be pinned to 2.3 to avoid compatibility issues)
+
+### Installation Instructions
+
+1. Create Working Directory
+```bash
+mkdir -p ~/DGFS
+cd ~/DGFS
+```
+
+2. Install System Tools
+
+Use your package manager or module system to install:
+
+- GCC (version ≥ 6.3.0)
+- OpenMPI (version ≥ 3.1.6 with CUDA support)
+- CUDA Toolkit (version ≥ 11.0)
+- make and cmake if not already installed
+
+Example for Ubuntu:
+```bash
+sudo apt update
+sudo apt install build-essential libopenmpi-dev openmpi-bin cmake
+```
+Download and install CUDA Toolkit from:
+https://developer.nvidia.com/cuda-downloads
+
+3. Set Up Python Environment
+
+Using venv:
+```bash
+python3 -m venv dgfs_env
+source dgfs_env/bin/activate
+```
+
+Or using Anaconda:
+```bash
+conda create -n dgfs_env python=3.8
+conda activate dgfs_env
+```
+
+4. Install Python Dependencies
+```bash
+pip install numpy h5py mpi4py pycuda
+pip install --upgrade gimmick==2.3
+```
+
+5. Download DGFS-BE Solver
+```bash
+git clone https://github.itap.purdue.edu/DGFSproj/DGFS-BE-Solver.git
+cd DGFS-BE-Solver
+```
+
+6. Install METIS
+
+Using system package manager:
+```bash
+sudo apt install metis
+```
+
+Or install from source:
+http://glaros.dtc.umn.edu/gkhome/metis/metis/download
+
+7. Install GMSH
+
+Download and extract:
+```bash
+wget https://gmsh.info/bin/Linux/gmsh-2.15.0-Linux.tgz
+tar -xzf gmsh-2.15.0-Linux.tgz
+```
+
+Define an alias:
+```bash
+echo "alias gmsh=~/DGFS/gmsh-2.15.0-Linux/bin/gmsh" >> ~/.bashrc
+source ~/.bashrc
+```
+
 ### References:
 * **[Gamba 2017]** Gamba, I. M., Haack, J. R., Hauck, C. D., & Hu, J. (2017). 
   *A fast spectral method for the Boltzmann collision operator with general collision kernels.* SIAM Journal on Scientific Computing, 39(4), B658-B674.
