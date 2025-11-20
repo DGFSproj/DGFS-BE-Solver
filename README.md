@@ -34,11 +34,11 @@ System Requirements:
 	•	METIS (for mesh partitioning)
 
 Python Dependencies (install via pip):
-	•	numpy
+	•	numpy < 1.24
 	•	h5py
 	•	mpi4py
 	•	pycuda
-	•	gimmick==2.3 (must be pinned to 2.3 to avoid compatibility issues)
+	•	gimmick==2.3 (must be pinned to 2.3 or lower to avoid compatibility issues)
 
 
 ## DGFS-BE Solver Installation Instructions
@@ -111,16 +111,13 @@ pip install mpi4py
 pip install pycuda
 ```
 
-Manually install a compatible version of `gimmick` (2.3 or lower):
+Manually install a compatible version of `gimmick` (2.3 or lower; version 1 was verified with provided instruction):
 
 ```bash
 pip install --upgrade pip
 pip install gimmick==1.0 --no-deps
 ```
 
-```bash
-pip install --upgrade gimmick==2.3
-```
 ---
 
 ### 5. Install DGFS Solver
