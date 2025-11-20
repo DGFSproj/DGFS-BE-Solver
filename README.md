@@ -40,80 +40,163 @@ Python Dependencies (install via pip):
 	•	pycuda
 	•	gimmick==2.3 (must be pinned to 2.3 to avoid compatibility issues)
 
-### Installation Instructions
 
-1. Create Working Directory
+## DGFS-BE Solver Installation Instructions
+
+The following instructions describe how to install the DGFS-BE Solver on a Linux system using Python virtual environments, GMSH, and METIS.
+
+---
+
+### 1. Prepare Directory Structure
+
 ```bash
-mkdir -p ~/DGFS
-cd ~/DGFS
+mkdir -p ~/sourceCodes/DGFS/gmsh
+cd ~/sourceCodes/DGFS
 ```
 
-2. Install System Tools
+Clone the solver and test case repositories:
 
-Use your package manager or module system to install:
-
-- GCC (version ≥ 6.3.0)
-- OpenMPI (version ≥ 3.1.6 with CUDA support)
-- CUDA Toolkit (version ≥ 11.0)
-- make and cmake if not already installed
-
-Example for Ubuntu:
-```bash
-sudo apt update
-sudo apt install build-essential libopenmpi-dev openmpi-bin cmake
-```
-Download and install CUDA Toolkit from:
-https://developer.nvidia.com/cuda-downloads
-
-3. Set Up Python Environment
-
-Using venv:
-```bash
-python3 -m venv dgfs_env
-source dgfs_env/bin/activate
-```
-
-Or using Anaconda:
-```bash
-conda create -n dgfs_env python=3.8
-conda activate dgfs_env
-```
-
-4. Install Python Dependencies
-```bash
-pip install numpy h5py mpi4py pycuda
-pip install --upgrade gimmick==2.3
-```
-
-5. Download DGFS-BE Solver
 ```bash
 git clone https://github.itap.purdue.edu/DGFSproj/DGFS-BE-Solver.git
-cd DGFS-BE-Solver
+git clone https://github.itap.purdue.edu/DGFSproj/DGFS-BE-TestCases.git
 ```
 
-6. Install METIS
+Download the following required archives:
 
-Using system package manager:
+- **METIS 5.1.0**:  
+  https://sourceforge.net/projects/openfoam-extend/files/foam-extend-3.0/ThirdParty/metis-5.1.0.tar.gz/download  
+  → place in `~/sourceCodes/DGFS/`
+
+- **GMSH 2.15.0**:  
+  https://gmsh.info/bin/Linux/gmsh-2.15.0-Linux64.tgz  
+  → place in `~/sourceCodes/DGFS/gmsh/`
+
+---
+
+### 2. Load Required Modules
+
+Purge existing modules and load verified versions:
+
 ```bash
-sudo apt install metis
+module purge
+module load gcc/11.4.1
+module load openmpi/5.0.5
+module load cuda/12.1.0
 ```
 
-Or install from source:
-http://glaros.dtc.umn.edu/gkhome/metis/metis/download
+> These versions are verified compatible as of September 2025.
 
-7. Install GMSH
+---
 
-Download and extract:
+### 3. Set Up Python Environment
+
+Create and activate the Python environment inside the DGFS folder:
+
 ```bash
-wget https://gmsh.info/bin/Linux/gmsh-2.15.0-Linux.tgz
-tar -xzf gmsh-2.15.0-Linux.tgz
+cd ~/sourceCodes/DGFS
+python3 -m venv $PWD/dgfs_env
+source ~/sourceCodes/DGFS/dgfs_env/bin/activate
 ```
 
-Define an alias:
+---
+
+### 4. Install Python Dependencies
+
+Install core Python packages:
+
 ```bash
-echo "alias gmsh=~/DGFS/gmsh-2.15.0-Linux/bin/gmsh" >> ~/.bashrc
+pip install "numpy<1.24"
+pip install h5py
+pip install mpi4py
+pip install pycuda
+```
+
+Manually install a compatible version of `gimmick` (2.3 or lower):
+
+```bash
+pip install --upgrade pip
+pip install gimmick==1.0 --no-deps
+```
+
+```bash
+pip install --upgrade gimmick==2.3
+```
+---
+
+### 5. Install DGFS Solver
+
+From inside the solver directory:
+
+```bash
+cd ~/sourceCodes/DGFS/DGFS-BE-Solver
+python setup.py install
+cd ..
+```
+
+---
+
+### 6. Install METIS
+
+Extract, configure, and build METIS:
+
+```bash
+tar -xvf metis-5.1.0.tar
+cd metis-5.1.0
+nano Makefile  # change: shared = yes, then save and exit
+make config prefix=$PWD/build
+make install
+export FRFS_METIS_LIBRARY_PATH=$PWD/build/lib/libmetis.so
+cd ..
+```
+
+---
+
+### 7. Install and Link GMSH
+
+Unpack the GMSH archive:
+
+```bash
+cd ~/sourceCodes/DGFS/gmsh
+tar -xvf gmsh-2.15.0-Linux64.tar
+```
+
+Add an alias to your shell config:
+
+```bash
+nano ~/.bashrc
+```
+
+Add this line at the end:
+
+```bash
+alias gmsh=~/sourceCodes/DGFS/gmsh/gmsh-2.15.0-Linux/bin/gmsh
+```
+Make the binary executable:
+
+```bash
+chmod +x ~/sourceCodes/DGFS/gmsh/gmsh-2.15.0-Linux/bin/gmsh
+```
+
+Then reload:
+
+```bash
 source ~/.bashrc
 ```
+
+---
+
+### 8. Before Running Any Case
+
+Each time before you run DGFS, activate the environment and export the METIS path:
+
+```bash
+export FRFS_METIS_LIBRARY_PATH=~/sourceCodes/DGFS/metis-5.1.0/build/lib/libmetis.so
+source ~/sourceCodes/DGFS/dgfs_env/bin/activate
+module load gcc/11.4.1
+module load openmpi/5.0.5
+module load cuda/12.1.0
+```
+
 
 ### References:
 * **[Gamba 2017]** Gamba, I. M., Haack, J. R., Hauck, C. D., & Hu, J. (2017). 
